@@ -196,7 +196,7 @@ That orthogonality can be seen by unrolling the table columns:
 6: G#5
 ```
 
-==== General Theory of Connecting Interval Chains
+#### General Theory of Connecting Interval Chains
 
 Parallel orthogonal chains of any interval may be created. Typically, tuning systems use an octave interval. PATH uses 5ths (modulo 7). A second order interval to intersect, and thereby connect, the non-factoring chains logically expresses the comma-spreads between each chain. PATH uses 8ths (modulo 12) to connect the 5ths.
 
