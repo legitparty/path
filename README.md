@@ -2,7 +2,11 @@
 
 ## Summary
 
-PATH is a tuning theory and method for pianos and other fixed keyboard instruments with natural variations in inharmonicity. It can be used for any keyboard instrument with a fixed pitch, even with no inharmonicity. A theory is presented describing the mathematic and scientific effects of tuning for psychoacoustic consonance, and a technique is developed from the theory. The result is a tuning method that is easy enough for instrumentalists to implement and maintain, having reproducible contrapuntal aesthetic properties. It introduces new controls for future tuning systems by way of a new theory and practice. 
+PATH is a tuning theory and method for pianos and other fixed keyboard instruments with natural variations in inharmonicity. It can be used for any keyboard instrument with a fixed pitch, even with no inharmonicity. A theory is presented describing the mathematic and scientific effects of tuning for psychoacoustic consonance, and a technique is developed from the theory. 
+
+The result is a tuning method that is easy enough for instrumentalists to implement and maintain, having reproducible contrapuntal aesthetic properties. It introduces new controls for future tuning systems by way of a new theory and practice. 
+
+Instead of focusing on mitigations, the focus is on consonance. It is therefore trivial to test any aspect of the tuning, by testing any 8ths or 5ths, especially where a particular set is expected to be perfect, making diagnostics and maintenence easy for any instrumentalist. 
 
 The theory describes an inharmonicity coefficient that stretches octaves across the pythagorean comma, and the resulting psychoacoustic properties that vary across arbitrary inharmonicity coefficients in between that wide value and 0. The technique is developed as a recursive-descent optimization algorithm that solves for contrapuntal consonance and “shaped” dissonance under the theory, noting that consonance can be held fixed for entire classes of intervals relating to counterpoint intervals. 
 
