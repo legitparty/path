@@ -233,7 +233,7 @@ In fact, the number of 5ths moved is arbitrary. For example, not moving 5ths at 
 
 This means that any 7 chains of 5ths can have 7 random (arbitrarily tuned) 8ths connecting them, as long as each 8th connects to a distinct chain connected to no other 8th. However, the ratio between each chain would vary depending on the distance away from the ideal inharmonicity coefficient of the stretch of each 8th. That is, if the ideal coefficient is used, the ratios between each respective chain will be equal, and all ratios will be per-interval constant, a perfect even-stretch temperament.
 
-#### Beat Effects on Large Intervals
+#### Beat Effects on Lower Harmonic Intervals
 
 For inharmonicity coefficients below the ideal coefficient, the speed of the beats between the 8ths and the 4ths are inverse-proportional to each other. That is, the ideal coefficient has perfect 8ths, and a coefficient of 0 has perfect 4ths, and there is a gradient between them. Most pianos have very small coefficients in the midrange, but 8ths tend to be orchestrated in the outer ranges. This also means that the chains of 5ths will drift away from even pitch distribution, greatly affecting the intervals not yet defined, favoring short chains, lowering the total comma-drift across the edges of the chains. 
 
@@ -241,7 +241,7 @@ The same situation happens in typical Pythagorean comma spreads of 1st-order 8th
 
 It is possible to use a 1st-order of 4ths, and a 2nd-order of 8ths, but that lowers the number of 8ths over which to spread the comma, requiring a much higher inharmonicity coefficient. However, using 4ths would mean that only 5 parallel chains would need to optimized, rather than 7 for 5ths. That is, 5ths have less drift than 4ths, since the 5th circle spans a greater distance.  
 
-#### Beat Effects on Small Intervals
+#### Beat Effects on Higher Harmonic Intervals
 
 So far in the definition of PATH, there are definitions for 8ths, 5ths, and the resulting 4ths. All other intervals are undefined at this point. Defining 8ths and 5ths also implicitly defines 4ths. Theoretically, any modulo A against modulo B also implicitly defines modulo A-B, wherever the modulo B connects. 
 
