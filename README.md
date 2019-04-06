@@ -70,7 +70,7 @@ The smaller a Pythagorean ratio, the more chord-centric its tuning. That is, the
 
 #### A Fundamental-Oriented Definition of Contrapuntal Intervals
 
-This actually leads to a definition of consonant intervals in counterpoint. The Pythagorean ratios (`n+1/n` - 2/1, 3/2, 4/3, 5/4, etc.) with denominators that are powers of 2 (`(2^n+1)/2^n` — 3/2, 5/4, 9/8, etc.) are more consonant than Pythagorean Ratios which are not (4/3, 6/5, 8/7, etc.). The reason is because the bottom note of the ratio is phase aligned with the fundamental, and the top note phase aligns itself with the bottom note over the denominated period — the fundamental. The result is a consonant overall phase alignment with the fundamental.
+This actually leads to a definition of consonant intervals in counterpoint. The Pythagorean ratios (`(n+1)/n` - 2/1, 3/2, 4/3, 5/4, etc.) with denominators that are powers of 2 (`(2^n+1)/2^n` — 3/2, 5/4, 9/8, etc.) are more consonant than Pythagorean Ratios which are not (4/3, 6/5, 8/7, etc.). The reason is because the bottom note of the ratio is phase aligned with the fundamental, and the top note phase aligns itself with the bottom note over the denominated period — the fundamental. The result is a consonant overall phase alignment with the fundamental.
 
 Indeed, any interval with a denominator that is a power of 2, and a numerator above the denominator, satisfies this definition, including 5/2 (C4, E5), or 9/2 (C3, D5). But try 5/3 (G4, E5) and notice the difference. That extends the definition beyond special Pythagorean ratios, into a definition based purely on the harmonic series. 
 
