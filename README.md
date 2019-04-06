@@ -38,11 +38,11 @@ This may be unintuitive for an instrumentalist struggling to maintain the pitch 
 
 ### Tuning Inharmonic Instruments by Ear has Irrationality
 
-During the development of counterpoint in the Baroque period, tuning systems were theoretically designed around rational intervals, but tunings could only be implemented by ear, so tunings could only be implemented along psychoacoustic alignments which aren’t truly rational. 
+During the development of counterpoint in the Baroque period, tuning systems were theoretically designed around rational intervals, but tunings could only be implemented by ear, so tunings could only be implemented along psychoacoustic alignments which aren’t truly rational. Even though ratios were prescribed, measurement was done by ear, so the inharmonicity of octaves, and the lack of understanding of inharmonicity, limited tuning system design to a single octave of 5ths, because octaves could not reproduce the effects of the ratios. That prevented the formal distribution of the pythagorean comma across multiple octaves by ear, which is now possible.
 
 At that time, tuning beats wide to spread the Pythagorean comma was understood, but there was considerable debate, one side arguing to spread the Pythagorean comma completely evenly, the other side arguing to leave select intervals beatless. The argument to spread evenly is to have effects be reproducible across key changes, but it is actually easier to converge on a tuning when fewer intervals are to be tempered.
 
-On the side of even temperament, the *composer* is asking for reproducibility, and on the side of consonant temperament, the *tuner* is asking for reproducibility. The debate effectively ends with the tuner giving up attempting to converge on an optimal tuning, the composer expecting convergence, and the instrumentalist working with whatever has converged. But there should be no reason why both cannot demand reproducibility through a proper foundational development of the field of tuning theory, a theory enabling the development of technique to optimize with reproducible cost functions. 
+On the side of even temperament, the *composer* is asking for reproducibility, and on the side of consonant temperament, the *tuner* is asking for reproducibility. The debate effectively ends with the tuner giving up attempting to converge on an optimal tuning, the composer expecting convergence, and the instrumentalist working with whatever has converged. But there should be no reason why both cannot demand reproducibility through a proper foundational development of the field of tuning theory, a theory enabling the development of technique to optimize with reproducible psychoacoustic effects. 
 
 ## Theory
 
