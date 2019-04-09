@@ -364,15 +364,15 @@ Each 8th connection that staggers from outside the temperament can be placed any
 
 5th Chain Legend:
 - chain-modulo: note-link, note-link[, …]
-- “note>”: 8th connection source up
-- “note->”: 8th connection source up to another temperament 
-- “<note“: 8th connection source down
-- “<-note”: 8th connection source down to another temperament
-- “note<”: 8th connection sink up
-- “>note”: 8th connection sink down
-- “note<-”: 8th connection sink up from another temperament
-- “->note”: 8th connection sink down from another temperament
-- “!note”: reference note, counts as a sink
+- `note>`: 8th connection source up
+- `note->`: 8th connection source up to another temperament 
+- `<note`: 8th connection source down
+- `<-note`: 8th connection source down to another temperament
+- `note<`: 8th connection sink up
+- `>note`: 8th connection sink down
+- `note<-`: 8th connection sink up from another temperament
+- `->note`: 8th connection sink down from another temperament
+- `!note`: reference note, counts as a sink
 
 8th Connection Legend:
 - from-modulo, to-modulo: from-note, to-note
@@ -403,13 +403,13 @@ The 8th connections:
 #### 2nd Temperament
 
 The 5th chains are:
-- 2: <-A#1, <-F2<-, <C3
-- 4: <-C2<, <-G2, D3
-- 6: <-D2, <-A2<-, <E3
-- 1: <-E2<, B2
-- 3: <-B1, <-F#2<-, <C#3
-- 5: <-C#2<, <-G#2, D#3
-- 0: <-D#2, A#2<-
+- 2: `<-A#1`, `<-F2<-`, `<C3`
+- 4: `<-C2<`, `<-G2`, `D3`
+- 6: `<-D2`, `<-A2<-`, `<E3`
+- 1: `<-E2<`, `B2`
+- 3: `<-B1`, `<-F#2<-`, <C#3`
+- 5: `<-C#2<`, `<-G#2`, D#3`
+- 0: `<-D#2`, `A#2<-`
 
 The 8th connections:
 - 0, 2: F3, F2
@@ -423,13 +423,13 @@ The 8th connections:
 #### 3rd Temperament
 
 The 5th chains are:
-- 0: <-F3, !C4, <G4->
-- 2: G3<, D4, <A4
-- 4: <-A3<, E4->, <B4
-- 6: B3<, <F#4
-- 1: <-F#3<, C#4->, <G#4
-- 3: G#3<, D#4, <A#4
-- 5: <-A#3<, F4->
+- 0: `<-F3`, `!C4`, `<G4->`
+- 2: `G3<`, `D4`, `<A4`
+- 4: `<-A3<`, `E4->`, `<B4`
+- 6: `B3<`, `<F#4`
+- 1: `<-F#3<`, `C#4->`, `<G#4`
+- 3: `G#3<`, `D#4`, `<A#4`
+- 5: `<-A#3<`, `F4->`
 
 The 8th connections are:
 - 0, 2: G4, G3
@@ -442,13 +442,13 @@ The 8th connections are:
 #### 4th Temperament
 
 The 5th chains are:
-- 5: C5->, ->G5, <D6->
-- 0: D5<, A5, E6
-- 2: ->E5, B5->, <F#6
-- 4: F#5<, C#6
-- 6: ->C#5, G#5->, <D#6
-- 1: D#5<, A#5, F6
-- 3: ->F5, C6->
+- 5: `C5->`, `->G5`, `<D6->`
+- 0: `D5<`, `A5`, `E6`
+- 2: `->E5`, `B5->`, `<F#6`
+- 4: `F#5<`, `C#6`
+- 6: `->C#5`, `G#5->`, `<D#6`
+- 1: `D#5<`, `A#5`, `F6`
+- 3: `->F5`, `C6->`
 
 The 8th connections are:
 - 0, 5: C4, C5
@@ -462,13 +462,13 @@ The 8th connections are:
 #### 5th Temperament
 
 The 5th chains are:
-- 3: G6, ->D7, <A7
-- 5: A6<, E7, B7
-- 0: ->B6, F#7, (<C#8)
-- 2: C#7<, G#7
-- 4: ->G#6, D#7, <A#7
-- 6: A#6<, F7, C8
-- 1: ->C7, G7
+- 3: `G6`, `->D7`, `<A7`
+- 5: `A6<`, `E7`, `B7`
+- 0: `->B6`, `F#7`, `(<C#8)`
+- 2: `C#7<`, `G#7`
+- 4: `->G#6`, `D#7`, `<A#7`
+- 6: `A#6<`, `F7`, `C8`
+- 1: `->C7`, `G7`
 
 The 8th connections are:
 - 5, 3: G5, G6
