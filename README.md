@@ -8,7 +8,7 @@ It is based on new tuning and contrapuntal theories, also presented, providing a
 
 A theory is presented describing the mathematic and scientific effects of tuning for psychoacoustic consonance, and a technique is developed from the theory. Instead of focusing on mitigations, the focus is on consonance.
 
-The theory describes an inharmonicity coefficient that stretches octaves across the pythagorean comma, and the resulting psychoacoustic properties that vary across arbitrary inharmonicity coefficients in between that wide value and 0. The technique is developed as a recursive-descent optimization algorithm that solves for contrapuntal consonance and “shaped” dissonance under the theory, noting that consonance can be held fixed for entire classes of intervals relating to counterpoint intervals. 
+The theory describes an inharmonicity coefficient that stretches octaves across the pythagorean comma, and the resulting psychoacoustic properties that vary across arbitrary inharmonicity coefficients in between that wide value and 0. The technique is developed as a recursive-descent optimization algorithm that solves for contrapuntal consonance and "shaped" dissonance under the theory, noting that consonance can be held fixed for entire classes of intervals relating to counterpoint intervals. 
 
 No beat counting is used. Only consonant-sounding 8ths and 5ths are used, tuning most 8ths, 5ths, and 4ths with deliberate psychoacoustic properties, while letting the logarithmic inharmonicity of the instrument evenly distribute the remaining intervals. A self-similar, hierarchical temperament pattern evenly distributes the contrapuntal psychoacoustic consonant properties, rather than focusing on evenly controlling the irrationalities in a single, small temperament range.
 
@@ -26,7 +26,7 @@ It will be shown that the psychoacoustic definition of counterpoint suits a part
 
 The typical method for tuning a piano is based on a 12 note reference temperament of a single octave to be extrapolated across the remaining octaves. This is a general tuning method that makes sense when thinking in terms of interval ratios first, as expected when tuning is presented only as a mathematical problem. It is optimal for instruments of low inharmonicity, and low amounts of change in inharmonicity across pitch, like the middle of a Steinway. However, most pianos are not Steinways, most pianos have arbitrary levels of inharmonicity, and most concert music spans many octaves. 
 
-Smaller ratios are now favored when piano tuning by ear because the beats can more easily be “felt”, because the beats are faster. That is, the tuning errors are more significant as beats when tuning smaller intervals, so it is easier to mitigate beat errors of the smaller intervals. However, faster beats are also harder to converge on.
+Smaller ratios are now favored when piano tuning by ear because the beats can more easily be "felt", because the beats are faster. That is, the tuning errors are more significant as beats when tuning smaller intervals, so it is easier to mitigate beat errors of the smaller intervals. However, faster beats are also harder to converge on.
 
 Beat counting itself has theoretical flaws which defy the common sense notion that consonance is much easier felt than the specifics of a dissonance. It is possible to reformulate tuning as a distribution of consonance with known dissonant effects, allowing any ear to keep a piano tuning maintained with nominal musical training. 
 
@@ -38,7 +38,7 @@ This may be unintuitive for an instrumentalist struggling to maintain the pitch 
 
 ### Tuning Inharmonic Instruments by Ear has Irrationality
 
-During the development of counterpoint in the Baroque period, tuning systems were theoretically designed around rational intervals, but tunings could only be implemented by ear, so tunings could only be implemented along psychoacoustic alignments which aren’t truly rational. Even though ratios were prescribed, measurement was done by ear, so the inharmonicity of octaves, and the lack of understanding of inharmonicity, limited tuning system design to a single octave of 5ths, because octaves could not reproduce the effects of the ratios. That prevented the formal distribution of the pythagorean comma across multiple octaves by ear, which is now possible.
+During the development of counterpoint in the Baroque period, tuning systems were theoretically designed around rational intervals, but tunings could only be implemented by ear, so tunings could only be implemented along psychoacoustic alignments which aren't truly rational. Even though ratios were prescribed, measurement was done by ear, so the inharmonicity of octaves, and the lack of understanding of inharmonicity, limited tuning system design to a single octave of 5ths, because octaves could not reproduce the effects of the ratios. That prevented the formal distribution of the pythagorean comma across multiple octaves by ear, which is now possible.
 
 At that time, tuning beats wide to spread the Pythagorean comma was understood, but there was considerable debate, one side arguing to spread the Pythagorean comma completely evenly, the other side arguing to leave select intervals beatless. The argument to spread evenly is to have effects be reproducible across key changes, but it is actually easier to converge on a tuning when fewer intervals are to be tempered.
 
@@ -70,14 +70,14 @@ The smaller a Pythagorean ratio, the more chord-centric its tuning. That is, the
 
 #### A Fundamental-Oriented Definition of Contrapuntal Intervals
 
-This actually leads to a definition of consonant intervals in counterpoint. The Pythagorean ratios (`(n+1)/n` - 2/1, 3/2, 4/3, 5/4, etc.) with denominators that are powers of 2 (`(2^n+1)/2^n` — 2/1, 3/2, 5/4, 9/8, etc.) are more consonant than Pythagorean Ratios which are not (4/3, 6/5, 7/6, 8/7, etc.). The reason is because the bottom note of the ratio is phase aligned with the fundamental, and the top note phase aligns itself with the bottom note over the denominated period — the fundamental. The result is a consonant overall phase alignment with the fundamental.
+This actually leads to a definition of consonant intervals in counterpoint. The Pythagorean ratios (`(n+1)/n` - 2/1, 3/2, 4/3, 5/4, etc.) with denominators that are powers of 2 (`(2^n+1)/2^n` -- 2/1, 3/2, 5/4, 9/8, etc.) are more consonant than Pythagorean Ratios which are not (4/3, 6/5, 7/6, 8/7, etc.). The reason is because the bottom note of the ratio is phase aligned with the fundamental, and the top note phase aligns itself with the bottom note over the denominated period -- the fundamental. The result is a consonant overall phase alignment with the fundamental.
 
 Indeed, any interval with a denominator that is a power of 2, and a numerator above the denominator, satisfies this definition, including 5/2 (C4, E5), or 9/2 (C3, D5). But try 5/3 (G4, E5) and notice the difference. That extends the definition beyond special Pythagorean ratios, into a definition based purely on the harmonic series. 
 
 This theory is demonstrated in many ways:
 1. I had developed a dynamic tuner that solved for fundamental-oriented consonance, turning chords expected to be dissonant into consonant tonal structures. 
 2. 4/3 4ths would seem to be more consonant than 5/4 Major 3rds, but indeed traveling 4ths are avoided like the plague in counterpoint.
-3. “Overdriven” 4ths in a “power chord” actually have a fundamental re-established by the distortion process. Distortion makes the overall wave more square, which re-shapes the harmonic structure to be re-based from the fundamental. It is a way to lower the sound of a guitar by 2 octaves from the top note. This makes the 4ths become consonant tones.
+3. "Overdriven" 4ths in a "power chord" actually have a fundamental re-established by the distortion process. Distortion makes the overall wave more square, which re-shapes the harmonic structure to be re-based from the fundamental. It is a way to lower the sound of a guitar by 2 octaves from the top note. This makes the 4ths become consonant tones.
 
 #### A New Aspect of The Distinction Between Consonant and Dissonant Intervals
 
@@ -117,15 +117,15 @@ inharmonicity_coefficient_ratio(2, stretch_coeff(stretch_interval)) / (3.0/2)
 ```
 
 However, there are three problems with this:
-1. Pianos don’t have exactly this coefficient. 
+1. Pianos don't have exactly this coefficient. 
 2. Temperaments usually span 1 or 2 octaves, not 7. 
 3. The resulting 4th from the 8th minus the 5th.
 
 What are the effects of assuming that the piano has the desired coefficient across a small tempered region without the desired coefficient? The coefficient is only involved in the 8ths lining up with the 2nd harmonic because the 5ths line up with the 1st harmonic. This means that 5ths are independent of the coefficient, leaving only 8ths (and therefore resulting 4ths) dependent on the coefficient.
 
-This doesn’t mean that it is not possible to abuse a 5th to help an 8th line up with a particular coefficient. The point is: why formulate the temperament for beat offsets at all? Instead of spreading out mitigations that are difficult to implement, why not distribute evenly the desired properties that are much easier to feel? The proximity of the resultant 4ths to even-temperament shows that optimized solutions can have the power of mitigation, but better converge to a solution.
+This doesn't mean that it is not possible to abuse a 5th to help an 8th line up with a particular coefficient. The point is: why formulate the temperament for beat offsets at all? Instead of spreading out mitigations that are difficult to implement, why not distribute evenly the desired properties that are much easier to feel? The proximity of the resultant 4ths to even-temperament shows that optimized solutions can have the power of mitigation, but better converge to a solution.
 
-That is, the psychoacoustic value of a targeted approach is logically equal to a mitigated approach, so optimize the problem toward maximum consonance value, rather than minimum dissonance error, because the “cost function” toward a maximum is far better at converging on a solution.
+That is, the psychoacoustic value of a targeted approach is logically equal to a mitigated approach, so optimize the problem toward maximum consonance value, rather than minimum dissonance error, because the "cost function" toward a maximum is far better at converging on a solution.
 
 Consonance converges better because the beat amplitude envelope is a mathematical effect that is directly observed as a percept by the ear, but the timing of the beat amplitude envelope itself is not directly observed as a percept. The requirement of a fine-grained, absolute sense of time is a tall order for humans. As far as I know, that sense is not part of human physiology, and has to be developed 100% cognitively. 
 
@@ -141,7 +141,7 @@ There are mainly two ways to deal with dissonance as an error:
 
 The beat-tempo required to implement a rational beat spread of a synchronous system is dependent on the inharmonicity coefficient, so it is very difficult to converge on a solution quickly. Interestingly, the *in*ability to rationally converge on a beat would classify the tuning as an irrational beat spread, and therefore have the psychoacoustic properties of lowering the amplitude of dissonance, the properties of an asynchronous system. Synchronous tuning is more suited to implementation on virtual instruments. 
 
-This might explain why modern tuning practice prefers to use the error mitigation approach to achieve a stretched even-temperament, because an approximate asynchronous solution is aesthetically equal to a perfect asynchronous solution. However, the difficulty of the practice limits amateur adoption, creating an “ivory tower” mysticism of skill around the practice, but it should be possible to tune an instrument as long as there is some sense of unison. A musician should not need to hire a professional tuner. 
+This might explain why modern tuning practice prefers to use the error mitigation approach to achieve a stretched even-temperament, because an approximate asynchronous solution is aesthetically equal to a perfect asynchronous solution. However, the difficulty of the practice limits amateur adoption, creating an "ivory tower" mysticism of skill around the practice, but it should be possible to tune an instrument as long as there is some sense of unison. A musician should not need to hire a professional tuner. 
 
 There is also a scientific problem with the inability to converge on a tuning. The lack of convergence violates the principle of reproducibility, lowering the descriptiveness of the medium. The RPT exam requires a master tuning as a reference, but this tuning is not reproducible, so the exam is not technically scientific.
 
@@ -177,21 +177,21 @@ In theory, all notes can be tuned with just 5ths in a single direction, creating
 
 That orthogonality can be seen by unrolling the table columns:
 ```txt
-0: C4 — 1st link of each chain
+0: C4 - 1st link of each chain
 1: C#4
 2: D4
 3: D#4
 4: E4
 5: F4
 6: F#4
-0: G4 — 2nd link of each chain
+0: G4 - 2nd link of each chain
 1: G#4
 2: A4
 3: A#4
 4: B4
 5: C5
 6: C#5
-0: D5 — 3rd link of each chain
+0: D5 - 3rd link of each chain
 1: D#5
 2: E5
 3: F5
@@ -202,9 +202,19 @@ That orthogonality can be seen by unrolling the table columns:
 
 #### General Theory of Connecting Interval Chains
 
-Parallel orthogonal chains of any interval may be created. Typically, tuning systems use an octave interval. PATH uses 5ths (modulo 7). A second order interval to intersect, and thereby connect, the non-factoring chains logically expresses the comma-spreads between each chain. PATH uses 8ths (modulo 12) to connect the 5ths.
+A tuning system may be described simply as a function that takes a single parameter of a note, and returns a frequency. That is not necessarily even the case, since other parameters may be used, like musical context, or instrument properties. More generally, a tuning system is a system for tuning the pitches of notes. 
 
-The typical way to spread the Pythagorean comma is to use a 1st-order chain of 8ths, and a 2nd-order chain of 5ths, beat counting against a tempo that happens to line up with a starting note, and the inharmonicity of the instrument. But PATH shows that you can swap the orders, and connect 8ths purely, in a way that distributes the comma in a self-similar leaf pattern. 
+The possible scope of theory for tuning systems is vast. There are a lot of observations about it, and a variety of techniques, but not a lot of *descriptive* theory. Even the mathematics of tuning have trouble relating to specific aesthetic effects. 
+
+Parallel orthogonal chains of any interval may be created. Most tuning systems are based on allocating intervals within an octave. If all octaves are constrained to the same ratio, that leaves 12 "chains" of octaves. For example, all C notes are one chain, and all C# notes are a second chain, and so on, until reaching another C. 
+
+PATH uses 5ths (modulo 7). A second order interval to intersect, and thereby connect, the non-factoring chains logically expresses the comma-spreads between each chain.
+
+PATH is based on chains of 5ths instead of octaves. 5ths are 7 notes apart, meaning that 7 independent chains exist. The same is possible with 4ths and 5 independent chains. Each has different properties and side-effects to be considered.
+
+PATH uses 8ths (modulo 12) to connect the 5ths (modulo 7). 
+
+One way to spread the Pythagorean comma is to use a 1st-order chain of 8ths, and a 2nd-order chain of 5ths, beat counting a circle of 5ths against a tempo that happens to line up with a starting note, and the inharmonicity of the instrument. But PATH shows that you can swap the orders, and connect 8ths purely, in a way that distributes the comma in a self-similar leaf pattern. 
 
 PATH connects by 8ths. A note of `N % 7` connects to a note `(N - 8) % 7`, equal to `(N + 2) % 7`. A circle of chains connected by 8ths is therefore `[0, 2, 4, 6, 1, 3, 5]`. For example:
 ```txt
@@ -249,7 +259,7 @@ It is possible to use a 1st-order of 4ths, and a 2nd-order of 8ths, but that low
 
 So far in the definition of PATH, there are definitions for 8ths, 5ths, and the resulting 4ths. All other intervals are undefined at this point. Defining 8ths and 5ths also implicitly defines 4ths. Theoretically, any modulo A against modulo B also implicitly defines modulo A-B, wherever the modulo B connects. 
 
-In non-ideal inharmonicity conditions, an interesting property emerges from the non-equality of the smaller intervals: the logarithmic effects of differences in inharmonicity create logarithmic, irrational distributions of the smaller intervals, gaining the benefit of shaping the dissonant noise, lowering its average amplitude. That is, the imperfections are moved to where they benefit the solution. This may seem similar to “noise shaping”, but it is even better, because the noise is part of the solution. 
+In non-ideal inharmonicity conditions, an interesting property emerges from the non-equality of the smaller intervals: the logarithmic effects of differences in inharmonicity create logarithmic, irrational distributions of the smaller intervals, gaining the benefit of shaping the dissonant noise, lowering its average amplitude. That is, the imperfections are moved to where they benefit the solution. This may seem similar to "noise shaping", but it is even better, because the noise is part of the solution. 
 
 ### Even Consonance Distribution via Self-Similarity
 
@@ -265,11 +275,11 @@ The output variables are:
 2. The variations in the pitches of the smaller intervals, against the logarithmic inharmonic properties of the instrument.
 3. The sparse errors in 8ths, 5ths, and 4ths along the 5th-chain and 8th-connection boundaries. 
 
-Due to the gradient effects of non-ideal inharmonicity, an implementation should use short chains. The shortest chain-connection pattern possible is 2 5ths up, and 1 8th down. So a temperament “leaf” can be created from that. Then a “trunk” of 8ths can connect several leaf temperaments in a self-similar pattern. 
+Due to the gradient effects of non-ideal inharmonicity, an implementation should use short chains. The shortest chain-connection pattern possible is 2 5ths up, and 1 8th down. So a temperament "leaf" can be created from that. Then a "trunk" of 8ths can connect several leaf temperaments in a self-similar pattern. 
 
 Self-similar patterns are known for being mathematically ideal for distributing effects evenly. For example:
 - The constant ratio of even tempering is a self-similar pattern.
-- A “Poisson process” is a self-similar pattern.
+- A "Poisson process" is a self-similar pattern.
 - A fractal antenna can use a Hilbert curve to increase the distribution of the frequency sensitivity of the antenna; that is to increase the bandwidth. 
 - In Geographic Information Systems, spatial databases use self-similar spatial curves to temper access times against spatial data.
 - In information theory, self-similarity lowers entropy by definition. Similarly, the bandwidth of dissonance is increased, spreading the entropy across a band of frequencies.
@@ -278,7 +288,7 @@ Self-similar patterns are known for being mathematically ideal for distributing 
 
 ### The Middle Temperament Leaf
 
-First, create the smallest connected series of chains possible. Move ascending in 5ths against the 1st harmonic, and descend in octaves against the second harmonic, only to not-yet-tuned modulo-7 (perfect 5th) intervals. This creates a temperament “leaf node”. 
+First, create the smallest connected series of chains possible. Move ascending in 5ths against the 1st harmonic, and descend in octaves against the second harmonic, only to not-yet-tuned modulo-7 (perfect 5th) intervals. This creates a temperament "leaf node". 
 
 ```csv
 Interval, Note, Chain, Segment, Memo
@@ -363,7 +373,7 @@ Each 8th connection that staggers from outside the temperament can be placed any
 ### Chains and Connections
 
 5th Chain Legend:
-- chain-modulo: note-link, note-link[, …]
+- chain-modulo: note-link, note-link[, ...]
 - `note>`: 8th connection source up
 - `note->`: 8th connection source up to another temperament 
 - `<note`: 8th connection source down
@@ -558,8 +568,8 @@ Up, B7, 2, 5,
 Unison, B5, 2, 4,
 Up, B6, 4, 5, Up an 8th
 Up, F#7, 4, 5, Tune C#7 via this note.
-Up, C#8, 4, 5, This note does not exist…
-Down, C#7, 6, 5, …so go down a 4th from F#7, or an 8th from C#6
+Up, C#8, 4, 5, This note does not exist...
+Down, C#7, 6, 5, ...so go down a 4th from F#7, or an 8th from C#6
 Up, G#7, 6, 5,
 Unison, G#5, 6, 4,
 Up, G#6, 1, 5, Up an 8th
