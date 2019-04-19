@@ -49,6 +49,7 @@ class Note:
 		parent = self.get_interval(delta)
 
 		if parent.f is None:
+			self.notes.report()
 			raise IndexError("reference parent note %i has no frequency" % parent.n)
 
 		f = float(parent.f) * n / d
@@ -70,39 +71,66 @@ class Notes:
 	def __getitem__(self, n):
 		return self.notes[n]
 
+	def report(self):
+		import math
+		for note in self.notes:
+			if note.f is not None:
+				ref_f = self.notes[60].f * 2 ** (float(note.n - 60) / 12) 
+				diff_f = ref_f - note.f
+				diff_r = ref_f / note.f
+				cents = 1200.0 * math.log(diff_r) / math.log(2)
+				print "%i: %f, %f, %f, %f" % (note.n, note.f, ref_f, diff_f, cents)
+				for delta, n, d, c in [
+					(12, 2, 1, "c"),
+					(7,  3, 2, "c"),
+					(5,  4, 3, "d"),
+					(4,  5, 4, "c"),
+					(3,  6, 5, "d"),
+					(2,  9, 8, "c"),
+				]:
+					interval_note = note.get_interval(delta)
+					if note.f is not None and interval_note.f is not None:
+						interval_diff_f = note.f * n / d - interval_note.f
+						interval_diff_r = note.f * n / d / interval_note.f
+						cents = 1200.0 * math.log(interval_diff_r) / math.log(2)
+						print "\t%i/%i[%s] offset: %f, %f" % (n, d, c, interval_diff_f, cents)
+
+				print
+
 
 
 
 class ANotes(Notes):
-	def __init__(self):
+	def __init__(self, use_4ths = True):
 		Notes.__init__(self)
 		C4 = self[60]
 		# anchor C to 256 Hz
 		C4.set_frequency(256)
 
-		self.init_leaf(C4)
+		self.init_leaf(C4, use_4ths)
 
-		#self.report()
-
-		Cs5 = C4.get_interval(25)
+		up1 = C4.get_interval(25 if use_4ths else 21)
 		# anchor leaf from octave below
-		Cs5.rel_tune(-12, 2, 1)
+		up1.rel_tune(-12, 2, 1)
 
-		self.init_leaf(Cs5)
+		self.init_leaf(up1)
 
-		B1 = C4.get_interval(-25)
-		# anchor leaf from 3 octaves above
-		B1.rel_tune(36, 1, 8)
+		down1 = C4.get_interval(-25 if use_4ths else -21)
+		if use_4ths:
+			# anchor leaf from 3 octaves above
+			down1.rel_tune(36, 1, 8)
+		else:
+			# anchor leaf from 3 octaves above
+			down1.rel_tune(36, 1, 8)
 
-		self.init_leaf(B1)
+		self.init_leaf(down1)
+			
 
-	def init_leaf(self, note):
+	def init_leaf(self, note, use_4ths = True):
 
 		start = note
 
 		for x in range(7):
-			print start, note
-
 			note = note.get_interval(7)
 			note.rel_tune(-7, 3, 2)
 			note = note.get_interval(7)
@@ -110,10 +138,11 @@ class ANotes(Notes):
 
 			chain_5th_end = note
 
-			note = note.get_interval(5)
-			note.rel_tune(-5, 4, 3)
-			note = note.get_interval(5)
-			note.rel_tune(-5, 4, 3)
+			if use_4ths:
+				note = note.get_interval(5)
+				note.rel_tune(-5, 4, 3)
+				note = note.get_interval(5)
+				note.rel_tune(-5, 4, 3)
 
 			if x == 1: # second time
 				# anchor the next sequence by 5/4 against `start`
@@ -124,33 +153,11 @@ class ANotes(Notes):
 				note = chain_5th_end.get_interval(-12)
 				note.rel_tune(12, 1, 2)
 
-	def report(self):
-		import math
-		for note in self.notes:
-			if note.f is not None:
-				ref_f = 256 * 2 ** (float(note.n - 60) / 12) 
-				diff_f = ref_f - note.f
-				diff_r = ref_f / note.f
-				cents = 1200.0 * math.log(diff_r) / math.log(2)
-				print "%i: %f, %f, %f, %f" % (note.n, note.f, ref_f, diff_f, cents)
-				for delta, n, d in [
-					(12, 2, 1),
-					(7,  3, 2),
-					#(5,  4, 3),
-					(4,  5, 4),
-				]:
-					interval_note = note.get_interval(delta)
-					if note.f is not None and interval_note.f is not None:
-						interval_diff_f = note.f * n / d - interval_note.f
-						interval_diff_r = note.f * n / d / interval_note.f
-						cents = 1200.0 * math.log(interval_diff_r) / math.log(2)
-						print "\t%i/%i offset: %f, %f" % (n, d, interval_diff_f, cents)
-
 
 	
 
 def main():
-	anotes = ANotes()
+	anotes = ANotes(False)
 	anotes.report()
 
 if __name__ == "__main__":
