@@ -59,6 +59,12 @@ class Note:
 			self.f = f
 		else:
 			self.set_frequency(f)
+
+	def seq_tune(self, delta, n, d):
+		note = self.get_interval(delta)
+		note.rel_tune( - delta, n, d)
+
+		return note
 		
 
 class Notes:
@@ -84,7 +90,7 @@ class Notes:
 		import math
 		for note in self.notes:
 			if note.f is not None:
-				octave = note.n / 12
+				octave = note.n / 12 - 1 # MIDI octave to piano octave
 				ref_f = self.notes[60].f * 2 ** (float(note.n - 60) / 12) 
 				diff_f = ref_f - note.f
 				diff_r = ref_f / note.f
@@ -99,7 +105,11 @@ class Notes:
 					(2,  9,  8,  "c"),
 					(1,  17, 16, "c"),
 				]:
-					interval_note = note.get_interval(delta)
+					try:
+						interval_note = note.get_interval(delta)
+					except IndexError:
+						continue
+
 					if note.f is not None and interval_note.f is not None:
 						interval_diff_f = note.f * n / d - interval_note.f
 						interval_diff_r = note.f * n / d / interval_note.f
@@ -127,6 +137,7 @@ class Notes:
 			print "%i %i/%i percent consonant: %f" % (octave, n, d, float(consonant) * 100 / total)
 			print "%i %i/%i percent dissonant: %f" % (octave, n, d, float(dissonant) * 100 / total)
 			print "%i %i/%i percent obscured:  %f" % (octave, n, d, float(total - consonant - dissonant) * 100 / total)
+			print
 
 
 
@@ -184,12 +195,166 @@ class ANotes(Notes):
 				note = chain_5th_end.get_interval(-12)
 				note.rel_tune(12, 1, 2)
 
+class EvenNotes(Notes):
+	def __init__(self):
+		Notes.__init__(self)
 
+		for note in self.notes:
+			note.f = 256.0 * 2.0 ** ((note.n - 60) / 12.0)
+
+
+class PATHNotes(Notes):
+	def __init__(self):
+		Notes.__init__(self)
+
+		self.init_leaf3()
+
+		self.init_leaf4()
+
+		self.init_leaf2()
+
+		self.init_leaf5()
+
+		self.init_leaf1()
+
+	def init_leaf1(self):
+		A1 = self[60 - 12 - 12 - 3]
+		for note in [A1.get_interval(- i) for i in range(13)]:
+			note.rel_tune(12, 1, 2)
 	
+	def init_leaf2(self):
+		F3 = self[60 - 7]
+		F2 = F3.seq_tune(-12, 1, 2)
+
+		note = F2.seq_tune(-7, 2, 3)    # A#1
+		note = F2.seq_tune(7, 3, 2)     # C3
+		note = note.seq_tune(-12, 1, 2) # C2
+		note = note.seq_tune(7, 3, 2)   # G2
+		note = note.seq_tune(7, 3, 2)   # D3
+
+		A3 = self[60 - 3]
+		A2 = A3.seq_tune(-12, 1, 2)
+
+		note = A2.seq_tune(-7, 2, 3)    # D2
+		note = A2.seq_tune(7, 3, 2)     # E3
+		note = note.seq_tune(-12, 1, 2) # E2
+		note = note.seq_tune(7, 3, 2)   # B2
+		
+		Fs3 = self[60 - 6]
+		Fs2 = Fs3.seq_tune(-12, 1, 2)
+
+		note = Fs2.seq_tune(-7, 2, 3)   # B1
+		note = Fs2.seq_tune(7, 3, 2)    # C#3
+		note = note.seq_tune(-12, 1, 2) # C#2
+		note = note.seq_tune(7, 3, 2)   # G#2
+		note = note.seq_tune(7, 3, 2)   # D#3
+		
+		As3 = self[60 - 2]
+		As2 = As3.seq_tune(-12, 1, 2)
+
+		note = As2.seq_tune(-7, 2, 3)   # D#2
+		
+
+	def init_leaf3(self):
+		C4 = self[60]
+		# anchor C to 256 Hz
+		C4.set_frequency(256)
+
+		note = C4.seq_tune(-7, 2, 3)    # F3
+		note = C4.seq_tune(7, 3, 2)     # G4
+		note = note.seq_tune(-12, 1, 2) # G3
+		note = note.seq_tune(7, 3, 2)   # D4
+		note = note.seq_tune(7, 3, 2)   # A4
+		note = note.seq_tune(-12, 1, 2) # A3
+		# use 5/4 from C4, rather than pure pythagorean via 5ths, to roll back a syntonic comma across the circle. (80/64 instead of 81/64)
+		note = C4.seq_tune(4, 5, 4)     # E4
+		note = note.seq_tune(7, 3, 2)   # B4
+		note = note.seq_tune(-12, 1, 2) # B3
+		note = note.seq_tune(7, 3, 2)   # F#4
+		note = note.seq_tune(-12, 1, 2) # F#3
+		note = note.seq_tune(7, 3, 2)   # C#4
+		note = note.seq_tune(7, 3, 2)   # G#4
+		note = note.seq_tune(-12, 1, 2) # G#3
+		note = note.seq_tune(7, 3, 2)   # D#4
+		note = note.seq_tune(7, 3, 2)   # A#4
+		note = note.seq_tune(-12, 1, 2) # A#3
+		note = note.seq_tune(7, 3, 2)   # A#2
+		note = note.seq_tune(7, 3, 2)   # F3
+
+	def init_leaf4(self):
+		G4 = self[60 + 7]
+		G5 = G4.seq_tune(12, 2, 1)
+
+		note = G5.seq_tune(-7, 2, 3)    # C5
+		note = G5.seq_tune(7, 3, 2)     # D6
+		note = note.seq_tune(-12, 1, 2) # D5
+		note = note.seq_tune(7, 3, 2)   # A5
+		note = note.seq_tune(7, 3, 2)   # E6
+
+		E4 = self[60 + 4]
+		E5 = E4.seq_tune(12, 2, 1)
+
+		note = E5.seq_tune(7, 3, 2)     # B5
+		note = note.seq_tune(7, 3, 2)   # F#6
+		note = note.seq_tune(-12, 1, 2) # F#5
+		note = note.seq_tune(7, 3, 2)   # C#6
+
+		Cs4 = self[60 + 1]
+		Cs5 = Cs4.seq_tune(12, 2, 1)
+
+		note = Cs5.seq_tune(7, 3, 2)    # G#5
+		note = note.seq_tune(7, 3, 2)   # D#6
+		note = note.seq_tune(-12, 1, 2) # D#5
+		note = note.seq_tune(7, 3, 2)   # A#5
+		note = note.seq_tune(7, 3, 2)   # F6
+
+		F4 = self[60 + 5]
+		F5 = F4.seq_tune(12, 2, 1)
+
+		note = F5.seq_tune(7, 3, 2)   # C6	
+
+	def init_leaf5(self):
+		D6 = self[60 + 12 + 12 + 2]
+		D7 = D6.seq_tune(12, 2, 1)
+
+		note = D7.seq_tune(-7, 2, 3)    # G6
+		note = D7.seq_tune(7, 3, 2)     # A7
+		note = note.seq_tune(-12, 1, 2) # A6
+		note = note.seq_tune(7, 3, 2)   # E7
+		note = note.seq_tune(7, 3, 2)   # B7
+
+		B5 = self[60 + 12 + 11]
+		B6 = B5.seq_tune(12, 2, 1)
+
+		note = B6.seq_tune(7, 3, 2)     # F#7
+		# C#8 does not exist
+		note = note.seq_tune(-5, 3, 4)  # C#7 (down a 4th, rather than up a 5th and down an 8th)
+		note = note.seq_tune(7, 3, 2)   # G#7
+
+		Gs5 = self[60 + 12 + 8]
+		Gs6 = Gs5.seq_tune(12, 2, 1)
+
+		note = Gs6.seq_tune(7, 3, 2)    # D#7
+		note = note.seq_tune(7, 3, 2)        # A#7
+		note = note.seq_tune(-12, 1, 2)      # A#6
+		note = note.seq_tune(7, 3, 2)        # F7
+		note = note.seq_tune(7, 3, 2)        # C8
+
+		C6 = self[60 + 12 + 12]
+		C7 = C6.seq_tune(12, 2, 1)
+
+		note = C7.seq_tune(7, 3, 2)     # G7
+		
 
 def main():
+	evennotes = EvenNotes()
+	evennotes.report()
+
 	anotes = ANotes(False)
 	anotes.report()
+
+	pathnotes = PATHNotes()
+	pathnotes.report()
 
 if __name__ == "__main__":
 	main()
