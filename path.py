@@ -72,21 +72,32 @@ class Notes:
 		return self.notes[n]
 
 	def report(self):
+		total_key = lambda d, k: d.setdefault(k, [0])[0]
+		def inc_key(d, k):
+			d.setdefault(k, [0])[0] = total_key(d, k) + 1
+
+		interval_just_count = {}
+		interval_consonant_count = {}
+		interval_dissonant_count = {}
+		interval_total = {}
+
 		import math
 		for note in self.notes:
 			if note.f is not None:
+				octave = note.n / 12
 				ref_f = self.notes[60].f * 2 ** (float(note.n - 60) / 12) 
 				diff_f = ref_f - note.f
 				diff_r = ref_f / note.f
 				cents = 1200.0 * math.log(diff_r) / math.log(2)
 				print "%i: %f, %f, %f, %f" % (note.n, note.f, ref_f, diff_f, cents)
 				for delta, n, d, c in [
-					(12, 2, 1, "c"),
-					(7,  3, 2, "c"),
-					(5,  4, 3, "d"),
-					(4,  5, 4, "c"),
-					(3,  6, 5, "d"),
-					(2,  9, 8, "c"),
+					(12, 2,  1,  "c"),
+					(7,  3,  2,  "c"),
+					(5,  4,  3,  "d"),
+					(4,  5,  4,  "c"),
+					(3,  6,  5,  "d"),
+					(2,  9,  8,  "c"),
+					(1,  17, 16, "c"),
 				]:
 					interval_note = note.get_interval(delta)
 					if note.f is not None and interval_note.f is not None:
@@ -94,8 +105,28 @@ class Notes:
 						interval_diff_r = note.f * n / d / interval_note.f
 						cents = 1200.0 * math.log(interval_diff_r) / math.log(2)
 						print "\t%i/%i[%s] offset: %f, %f" % (n, d, c, interval_diff_f, cents)
+						inc_key(interval_total, (octave, n, d))
+
+						if interval_diff_f == 0.0:
+							inc_key(interval_just_count, (octave, n, d))
+
+						if abs(interval_diff_f) < 0.5:
+							inc_key(interval_consonant_count, (octave, n, d))
+
+						if abs(interval_diff_f) > 2.0 and abs(interval_diff_f) < 20.0:
+							inc_key(interval_dissonant_count, (octave, n, d))
 
 				print
+
+		for octave, n, d in sorted(interval_total.keys()):
+			total     = total_key(interval_total,           (octave, n, d))
+			just      = total_key(interval_just_count,      (octave, n, d))
+			consonant = total_key(interval_consonant_count, (octave, n, d))
+			dissonant = total_key(interval_dissonant_count, (octave, n, d))
+			print "%i %i/%i percent just:      %f" % (octave, n, d, float(just)      * 100 / total)
+			print "%i %i/%i percent consonant: %f" % (octave, n, d, float(consonant) * 100 / total)
+			print "%i %i/%i percent dissonant: %f" % (octave, n, d, float(dissonant) * 100 / total)
+			print "%i %i/%i percent obscured:  %f" % (octave, n, d, float(total - consonant - dissonant) * 100 / total)
 
 
 
