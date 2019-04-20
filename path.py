@@ -229,21 +229,17 @@ class ANotes(Notes):
 		start = note
 
 		for x in range(7):
-			note = note.get_interval(7)
-			note.rel_tune(-7, 3, 2)
+			note = note.seq_tune(7, 3, 2)
 			if x < 6: 
 				# not the last time
-				note = note.get_interval(7)
-				note.rel_tune(-7, 3, 2)
+				note = note.seq_tune(7, 3, 2)
 
 			if x == 1: # second time
 				# anchor the next sequence by 5/4 against `start`
-				note = start.get_interval(4)
-				note.rel_tune(-4, 5, 4)
+				note = start.seq_tune(4, 5, 4)
 			elif x < 6: # not the last time
 				# anchor the next sequence down an octave from `k`
-				note = note.get_interval(-12)
-				note.rel_tune(12, 1, 2)
+				note = note.seq_tune(-12, 1, 2)
 
 class EvenNotes(Notes):
 	def __init__(self):
