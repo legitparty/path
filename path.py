@@ -34,7 +34,7 @@ class Note:
 		self.coeff  = inharmonicity_coeff
 		self.octave = inharmonicity_coefficient_ratio(2, self.coeff)
 		self.parent = None
-		self.children = []
+		self.children = set()
 
 	def set_frequency(self, f):
 		if self.f is None:
@@ -45,6 +45,16 @@ class Note:
 	def get_interval(self, delta):
 		return self.notes[self.n + delta]
 
+	def get_interval_path(self, delta):
+		return self.notes.get_interval_path(self, self.get_interval(delta))
+
+	def add_child(self, child):
+		self.children.add(child)
+
+	def set_parent(self, parent):
+		self.parent = parent
+		parent.add_child(self)
+
 	def rel_tune(self, delta, n, d):
 		parent = self.get_interval(delta)
 
@@ -54,11 +64,13 @@ class Note:
 
 		f = float(parent.f) * n / d
 
-		if self.parent is not None:
-			self.parent = self
-			self.f = f
-		else:
+		if self.parent is None:
+			self.set_parent(parent)
 			self.set_frequency(f)
+		else:
+			self.notes.report()
+			print "parent is already assigned on %i (existing parent is %i, attempting to set %i)" % (self.n, self.parent.n, parent.n)
+			raise KeyError
 
 	def seq_tune(self, delta, n, d):
 		note = self.get_interval(delta)
@@ -66,6 +78,22 @@ class Note:
 
 		return note
 		
+	def get_parent(self):
+		return self.parent
+
+	def get_ancestry(self):
+		# include self in ancestry
+		yield self
+
+		node = self
+		while True:
+			ancestor = node.get_parent()
+			if not ancestor:
+				break
+
+			yield ancestor
+
+			node = ancestor
 
 class Notes:
 	def __init__(self):
@@ -77,6 +105,29 @@ class Notes:
 	def __getitem__(self, n):
 		return self.notes[n]
 
+	def get_interval_path(self, noteA, noteB):
+		from collections import deque
+		noteA_ancestry = deque(noteA.get_ancestry())
+		noteB_ancestry = deque(noteB.get_ancestry())
+		#print "noteA %r noteB %r" % (noteA_ancestry, noteB_ancestry)
+		while True:
+			if len(noteA_ancestry) > 0 and len(noteB_ancestry) > 0 and noteA_ancestry[-1] is noteB_ancestry[-1]:
+				# remove oldest common ancestor
+				noteA_ancestry.pop()
+				noteB_ancestry.pop()
+			else:
+				# all common ancestors removed
+				break
+
+		#print "common removed noteA %r noteB %r" % (noteA_ancestry, noteB_ancestry)
+		# traverse down the noteA_ancestry, toward noteB
+		for note in noteA_ancestry:
+			yield note
+
+		# traverse up the noteB_ancestry, toward noteB
+		for note in reversed(noteB_ancestry):
+			yield note
+
 	def report(self):
 		total_key = lambda d, k: d.setdefault(k, [0])[0]
 		def inc_key(d, k):
@@ -85,6 +136,7 @@ class Notes:
 		interval_just_count = {}
 		interval_consonant_count = {}
 		interval_dissonant_count = {}
+		interval_path_count = {}
 		interval_total = {}
 
 		import math
@@ -126,6 +178,13 @@ class Notes:
 						if abs(interval_diff_f) > 2.0 and abs(interval_diff_f) < 20.0:
 							inc_key(interval_dissonant_count, (octave, n, d))
 
+						print "path for %i" % note.n
+						for ancestor in note.get_interval_path(delta):
+							print "\t%i" % ancestor.n
+
+						for ancestor in note.get_interval_path(delta):
+							inc_key(interval_path_count, (octave, n, d))
+
 				print
 
 		for octave, n, d in sorted(interval_total.keys()):
@@ -133,10 +192,12 @@ class Notes:
 			just      = total_key(interval_just_count,      (octave, n, d))
 			consonant = total_key(interval_consonant_count, (octave, n, d))
 			dissonant = total_key(interval_dissonant_count, (octave, n, d))
+			path      = total_key(interval_path_count,      (octave, n, d))
 			print "%i %i/%i percent just:      %f" % (octave, n, d, float(just)      * 100 / total)
 			print "%i %i/%i percent consonant: %f" % (octave, n, d, float(consonant) * 100 / total)
 			print "%i %i/%i percent dissonant: %f" % (octave, n, d, float(dissonant) * 100 / total)
 			print "%i %i/%i percent obscured:  %f" % (octave, n, d, float(total - consonant - dissonant) * 100 / total)
+			print "%i %i/%i average path:      %f" % (octave, n, d, float(path) / total)
 			print
 
 
@@ -278,8 +339,7 @@ class PATHNotes(Notes):
 		note = note.seq_tune(7, 3, 2)   # D#4
 		note = note.seq_tune(7, 3, 2)   # A#4
 		note = note.seq_tune(-12, 1, 2) # A#3
-		note = note.seq_tune(7, 3, 2)   # A#2
-		note = note.seq_tune(7, 3, 2)   # F3
+		note = note.seq_tune(7, 3, 2)   # F4
 
 	def init_leaf4(self):
 		G4 = self[60 + 7]
@@ -335,10 +395,10 @@ class PATHNotes(Notes):
 		Gs6 = Gs5.seq_tune(12, 2, 1)
 
 		note = Gs6.seq_tune(7, 3, 2)    # D#7
-		note = note.seq_tune(7, 3, 2)        # A#7
-		note = note.seq_tune(-12, 1, 2)      # A#6
-		note = note.seq_tune(7, 3, 2)        # F7
-		note = note.seq_tune(7, 3, 2)        # C8
+		note = note.seq_tune(7, 3, 2)   # A#7
+		note = note.seq_tune(-12, 1, 2) # A#6
+		note = note.seq_tune(7, 3, 2)   # F7
+		note = note.seq_tune(7, 3, 2)   # C8
 
 		C6 = self[60 + 12 + 12]
 		C7 = C6.seq_tune(12, 2, 1)
@@ -347,11 +407,11 @@ class PATHNotes(Notes):
 		
 
 def main():
-	evennotes = EvenNotes()
-	evennotes.report()
+	#evennotes = EvenNotes()
+	#evennotes.report()
 
-	anotes = ANotes(False)
-	anotes.report()
+	#anotes = ANotes(False)
+	#anotes.report()
 
 	pathnotes = PATHNotes()
 	pathnotes.report()
