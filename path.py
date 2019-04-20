@@ -218,11 +218,23 @@ class ANotes(Notes):
 
 		self.init_leaf(up1)
 
+		up2 = C4.get_interval(42)
+		# anchor leaf from octave below
+		up2.rel_tune(-12, 2, 1)
+
+		self.init_leaf(up2)
+
 		down1 = C4.get_interval(-21)
 		# anchor leaf from 3 octaves above
 		down1.rel_tune(36, 1, 8)
 
 		self.init_leaf(down1)
+
+		down2 = C4.get_interval(-42)
+		# anchor leaf from 3 octaves above
+		down2.rel_tune(36, 1, 8)
+
+		self.init_leaf(down2)
 			
 
 	def init_leaf(self, note):
@@ -247,6 +259,56 @@ class EvenNotes(Notes):
 
 		for note in self.notes:
 			note.f = 256.0 * 2.0 ** ((note.n - 60) / 12.0)
+
+class TemperamentNotes(Notes):
+
+	def __init__(self):
+		Notes.__init__(self)
+		C4 = self[60]
+		# anchor C to 256 Hz
+		C4.set_frequency(256)
+
+		self.init_temperament(C4)
+
+		self.extrapolate_temperaments()
+
+	def extrapolate_temperament_octave(self, from_octave, to_octave):
+		shift_octave = to_octave - from_octave
+		for i in range(12):
+			note = self[60 + 12 * (from_octave - 4) + i]
+			note = note.seq_tune(shift_octave * 12, 2 ** shift_octave, 1)
+
+	def extrapolate_temperaments(self):
+		self.extrapolate_temperament_octave(4, 5)
+		self.extrapolate_temperament_octave(5, 6)
+		self.extrapolate_temperament_octave(6, 7)
+		self.extrapolate_temperament_octave(4, 3)
+		self.extrapolate_temperament_octave(3, 2)
+		self.extrapolate_temperament_octave(2, 1)
+
+
+class JustNotes(TemperamentNotes):
+	def init_temperament(self, C4):
+		# 3 terms
+		F4  = C4.seq_tune(5, 4, 3)  # 3 term -1
+		C4                          # 3 term  0
+		G4  = C4.seq_tune(7, 3, 2)  # 3 term +1
+		D4  = G4.seq_tune(-5, 3, 4) # 3 term +2
+
+		# 5 term +1
+		A4  = F4.seq_tune(4, 5, 4)  # 3 term -1
+		E4  = C4.seq_tune(4, 5, 4)  # 3 term  0
+		B4  = G4.seq_tune(4, 5, 4)  # 3 term +1
+		Fs4 = D4.seq_tune(4, 5, 4)  # 3 term +2
+
+		# 5 term -1
+		Db4 = F4.seq_tune(-4,   4,   5) # 3 term -1
+		Ab4 = C4.seq_tune(12-4, 4*2, 5) # 3 term  0
+		Eb4 = G4.seq_tune(-4,   4,   5) # 3 term +1
+		Bb4 = D4.seq_tune(12-4, 4*2, 5) # 3 term +2
+				
+		
+		
 
 
 class PATHNotes(Notes):
@@ -400,6 +462,9 @@ def main():
 
 	pathnotes = PATHNotes()
 	pathnotes.report()
+
+	justnotes = JustNotes()
+	justnotes.report()
 
 if __name__ == "__main__":
 	main()
