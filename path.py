@@ -148,14 +148,14 @@ class Notes:
 				diff_r = ref_f / note.f
 				cents = 1200.0 * math.log(diff_r) / math.log(2)
 				print "%i: %f, %f, %f, %f" % (note.n, note.f, ref_f, diff_f, cents)
-				for delta, n, d, c in [
-					(12, 2,  1,  "c"),
-					(7,  3,  2,  "c"),
-					(5,  4,  3,  "d"),
-					(4,  5,  4,  "c"),
-					(3,  6,  5,  "d"),
-					(2,  9,  8,  "c"),
-					(1,  17, 16, "c"),
+				for delta, n, d, in [
+					(12, 2,  1),
+					(7,  3,  2),
+					(5,  4,  3),
+					(4,  5,  4),
+					(3,  6,  5),
+					(2,  9,  8),
+					(1,  17, 16),
 				]:
 					try:
 						interval_note = note.get_interval(delta)
@@ -166,7 +166,7 @@ class Notes:
 						interval_diff_f = note.f * n / d - interval_note.f
 						interval_diff_r = note.f * n / d / interval_note.f
 						cents = 1200.0 * math.log(interval_diff_r) / math.log(2)
-						print "\t%i/%i[%s] offset: %f, %f" % (n, d, c, interval_diff_f, cents)
+						print "\t%i/%i offset: %f, %f" % (n, d, interval_diff_f, cents)
 						inc_key(interval_total, (octave, n, d))
 
 						if interval_diff_f == 0.0:
@@ -178,9 +178,9 @@ class Notes:
 						if abs(interval_diff_f) > 2.0 and abs(interval_diff_f) < 20.0:
 							inc_key(interval_dissonant_count, (octave, n, d))
 
-						print "path between %i and %i" % (note.n, note.n + delta)
-						for ancestor in note.get_interval_path(delta):
-							print "\t%i" % ancestor.n
+						#print "path between %i and %i" % (note.n, note.n + delta)
+						#for ancestor in note.get_interval_path(delta):
+						#	print "\t%i" % ancestor.n
 
 						for ancestor in note.get_interval_path(delta):
 							inc_key(interval_path_count, (octave, n, d))
@@ -204,56 +204,45 @@ class Notes:
 
 
 class ANotes(Notes):
-	def __init__(self, use_4ths = True):
+	def __init__(self):
 		Notes.__init__(self)
 		C4 = self[60]
 		# anchor C to 256 Hz
 		C4.set_frequency(256)
 
-		self.init_leaf(C4, use_4ths)
+		self.init_leaf(C4)
 
-		up1 = C4.get_interval(25 if use_4ths else 21)
+		up1 = C4.get_interval(21)
 		# anchor leaf from octave below
 		up1.rel_tune(-12, 2, 1)
 
 		self.init_leaf(up1)
 
-		down1 = C4.get_interval(-25 if use_4ths else -21)
-		if use_4ths:
-			# anchor leaf from 3 octaves above
-			down1.rel_tune(36, 1, 8)
-		else:
-			# anchor leaf from 3 octaves above
-			down1.rel_tune(36, 1, 8)
+		down1 = C4.get_interval(-21)
+		# anchor leaf from 3 octaves above
+		down1.rel_tune(36, 1, 8)
 
 		self.init_leaf(down1)
 			
 
-	def init_leaf(self, note, use_4ths = True):
-
+	def init_leaf(self, note):
 		start = note
 
 		for x in range(7):
 			note = note.get_interval(7)
 			note.rel_tune(-7, 3, 2)
-			note = note.get_interval(7)
-			note.rel_tune(-7, 3, 2)
-
-			chain_5th_end = note
-
-			if use_4ths:
-				note = note.get_interval(5)
-				note.rel_tune(-5, 4, 3)
-				note = note.get_interval(5)
-				note.rel_tune(-5, 4, 3)
+			if x < 6: 
+				# not the last time
+				note = note.get_interval(7)
+				note.rel_tune(-7, 3, 2)
 
 			if x == 1: # second time
 				# anchor the next sequence by 5/4 against `start`
 				note = start.get_interval(4)
 				note.rel_tune(-4, 5, 4)
-			else:
+			elif x < 6: # not the last time
 				# anchor the next sequence down an octave from `k`
-				note = chain_5th_end.get_interval(-12)
+				note = note.get_interval(-12)
 				note.rel_tune(12, 1, 2)
 
 class EvenNotes(Notes):
@@ -407,11 +396,11 @@ class PATHNotes(Notes):
 		
 
 def main():
-	#evennotes = EvenNotes()
-	#evennotes.report()
+	evennotes = EvenNotes()
+	evennotes.report()
 
-	#anotes = ANotes(False)
-	#anotes.report()
+	anotes = ANotes()
+	anotes.report()
 
 	pathnotes = PATHNotes()
 	pathnotes.report()
