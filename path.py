@@ -178,7 +178,7 @@ class Notes:
 						if abs(interval_diff_f) > 2.0 and abs(interval_diff_f) < 20.0:
 							inc_key(interval_dissonant_count, (octave, n, d))
 
-						print "path for %i" % note.n
+						print "path between %i and %i" % (note.n, note.n + delta)
 						for ancestor in note.get_interval_path(delta):
 							print "\t%i" % ancestor.n
 
