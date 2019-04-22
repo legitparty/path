@@ -368,6 +368,9 @@ class PATHNotes(Notes):
 		# anchor C to 256 Hz
 		C4.set_frequency(256)
 
+		# good Major 3rds by linking      E4 to C4              :         G3-B3 A3-C#4        C4-E4       D4-F#4         G4-B4 A4-C#5 
+		# good Major 3rds by linking both E4 to C4 and D#4 to B3: F#3-A#3 G3-B3 A3-C#4 B4-D#4 C4-E4 C#4-F D4-F#4 F#4-A#4 G4-B4 A4-C#5
+
 		note = C4.seq_tune(-7, 2, 3)    # F3
 		note = C4.seq_tune(7, 3, 2)     # G4
 		note = note.seq_tune(-12, 1, 2) # G3
@@ -378,12 +381,15 @@ class PATHNotes(Notes):
 		note = C4.seq_tune(4, 5, 4)     # E4
 		note = note.seq_tune(7, 3, 2)   # B4
 		note = note.seq_tune(-12, 1, 2) # B3
+		B3   = note
 		note = note.seq_tune(7, 3, 2)   # F#4
 		note = note.seq_tune(-12, 1, 2) # F#3
 		note = note.seq_tune(7, 3, 2)   # C#4
 		note = note.seq_tune(7, 3, 2)   # G#4
 		note = note.seq_tune(-12, 1, 2) # G#3
-		note = note.seq_tune(7, 3, 2)   # D#4
+		#note = note.seq_tune(7, 3, 2)   # D#4
+		# use 5/4 from B3
+		note = B3.seq_tune(4, 5, 4)     # D#4
 		note = note.seq_tune(7, 3, 2)   # A#4
 		note = note.seq_tune(-12, 1, 2) # A#3
 		note = note.seq_tune(7, 3, 2)   # F4
@@ -454,17 +460,17 @@ class PATHNotes(Notes):
 		
 
 def main():
-	evennotes = EvenNotes()
-	evennotes.report()
+	#evennotes = EvenNotes()
+	#evennotes.report()
 
-	anotes = ANotes()
-	anotes.report()
+	#anotes = ANotes()
+	#anotes.report()
 
 	pathnotes = PATHNotes()
 	pathnotes.report()
 
-	justnotes = JustNotes()
-	justnotes.report()
+	#justnotes = JustNotes()
+	#justnotes.report()
 
 if __name__ == "__main__":
 	main()
