@@ -1,5 +1,6 @@
 # inharmonicity model
 # http://daffy.uah.edu/piano/page4/page8/index.html
+# https://asa.scitation.org/doi/10.1121/1.1906888
 
 stretch_interval = ((1.5 ** 12) / (2.0 ** 7)) ** (1.0/7)
 stretch_interval
